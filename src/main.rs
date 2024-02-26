@@ -1,3 +1,39 @@
+
+
+
+
 fn main() {
-    println!("Hello, world!");
+    let model_resource = Box::new(RemoteResource::from_pretrained(
+        GptNeoModelResources::GPT_NEO_2_7B,
+    ));
+    let config_resource = Box::new(RemoteResource::from_pretrained(
+        GptNeoConfigResources::GPT_NEO_2_7B,
+    ));
+    let vocab_resource = Box::new(RemoteResource::from_pretrained(
+        GptNeoVocabResources::GPT_NEO_2_7B,
+    ));
+    let merges_resource = Box::new(RemoteResource::from_pretrained(
+        GptNeoMergesResources::GPT_NEO_2_7B,
+    ));
+
+    let generate_config = TextGenerationConfig {
+        model_type: ModelType:GPTNeo,
+        model_resource,
+        config_resource,
+        vocab_respurce,
+        merges_resource,
+        num_beams: 5,
+        no_repeat_ngram_size: 2,
+        max_length:100,
+        ..Default::default()
+    };
+
+    let model = TextGenerationModel::new(generate_config).unwrap();
+
+    loop{
+        let mut line = String::new();
+        std::io::stdin().read_line(&mut line).unwrap();
+        
+    }
+
 }
