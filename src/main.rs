@@ -17,7 +17,7 @@ fn main() {
     ));
 
     let generate_config = TextGenerationConfig {
-        model_type: ModelType:GPTNeo,
+        model_type: ModelType::GPTNeo,
         model_resource,
         config_resource,
         vocab_respurce,
@@ -33,7 +33,12 @@ fn main() {
     loop{
         let mut line = String::new();
         std::io::stdin().read_line(&mut line).unwrap();
-        
+        let split = line.split('/').collect::<Vec<&str>>();
+        let slc = split.as_slice();
+        let output = model.generate(&slc[1..],Some(slc[0]));
+        for sentence in output{
+            println!("{}",sentence);
+        }
     }
 
 }
