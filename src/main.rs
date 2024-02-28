@@ -1,7 +1,4 @@
 
-
-
-
 fn main() {
     let model_resource = Box::new(RemoteResource::from_pretrained(
         GptNeoModelResources::GPT_NEO_2_7B,
@@ -42,3 +39,5 @@ fn main() {
     }
 
 }
+
+
